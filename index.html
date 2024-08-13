@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" defer></script>
+    <title>Party List</title>
+  </head>
+  <body>
+    <h1>Recent Party List</h1>
+    <form id="addParty">
+      <label>
+        Party Name:
+        <input
+          type="text"
+          name="partyTitle"
+          placeholder="Input party name here"
+        />
+      </label>
+      <label>
+        Date:
+        <input type="date" name="partyDate" placeholder="Input date here" />
+      </label>
+      <label>
+        Time:
+        <input type="time" name="partyTime" placeholder="Input time here" />
+      </label>
+      <label>
+        Location:
+        <input
+          type="text"
+          name="partyLocation"
+          placeholder="Input location here"
+        />
+      </label>
+      <label>
+        Description:
+        <input
+          type="text"
+          name="partyDescription"
+          placeholder="Input a brief description here"
+        />
+      </label>
+      <button>Add Party!</button>
+    </form>
+    <ul id="parties"></ul>
+  </body>
+</html>
