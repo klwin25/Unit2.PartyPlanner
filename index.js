@@ -1,4 +1,4 @@
-const COHORT = "2109-CPU-RM-WEB-PT";
+const COHORT = "2407-FTB-ET-WEB-FT";
 const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api/${COHORT}/events`;
 
 const state = {
