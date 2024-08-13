@@ -33,28 +33,19 @@ async function getParties() {
 async function addParty(event) {
   event.preventDefault();
 
-  //   const partyTitle = addPartyForm.elements["partyTitle"].value;
-  //   const partyDate = addPartyForm.elements["partyDate"].value;
-  //   const partyTime = addPartyForm.elements["partyTime"].value;
-  //   const partyLocation = addPartyForm.elements["partyLocation"].value;
-  //   const partyDescription = addPartyForm.elements["partyDescription"].value;
+  const partyTitle = addPartyForm.partyTitle.value;
+  const partyDate = addPartyForm.partyDate.value;
+  const partyLocation = addPartyForm.partyLocation.value;
+  const partyDescription = addPartyForm.partyDescription.value;
 
-  await createParty(
-    addPartyForm.partyTitle.value,
-    addPartyForm.partyDate.value,
-    addPartyForm.partyTime.value,
-    addPartyForm.partyLocation.value,
-    addPartyForm.partyDescription.value
-  );
-
-  //   addPartyForm.reset();
-  //   render();
+  await createParty(partyTitle, partyDate, partyLocation, partyDescription);
+  render();
+  addPartyForm.reset();
 }
 
 async function createParty(
   partyTitle,
   partyDate,
-  partyTime,
   partyLocation,
   partyDescription
 ) {
@@ -63,11 +54,10 @@ async function createParty(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        partyTitle,
-        partyDate,
-        partyTime,
-        partyLocation,
-        partyDescription,
+        name: partyTitle,
+        description: partyDescription,
+        date: partyDate,
+        location: partyLocation,
       }),
     });
 
@@ -79,10 +69,8 @@ async function createParty(
 }
 
 async function updateParty(
-  id,
   partyTitle,
   partyDate,
-  partyTime,
   partyLocation,
   partyDescription
 ) {
@@ -91,11 +79,10 @@ async function updateParty(
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        partyTitle,
-        partyDate,
-        partyTime,
-        partyLocation,
-        partyDescription,
+        name: partyTitle,
+        description: partyDescription,
+        date: partyDate,
+        location: partyLocation,
       }),
     });
     const json = await response.json();
@@ -130,20 +117,22 @@ async function deleteParty(id) {
 
 function renderParties() {
   if (!state.parties.length) {
-    partyList.innerHTML = `<li>No parties found.</li>`;
+    partyList.innerHTML = /*html*/ `<li> No parties found. </li>`;
     return;
   }
 
   const partyCards = state.parties.map((party) => {
     const partyCard = document.createElement("li");
     partyCard.classList.add("party");
-    partyCard.innerHTML = `
-    <h2>${party.partyTitle}</h2>
-    <p>ID ${party.id}</p>
-    <p>${party.partyDate}</p>
-    <p>${party.partyTime}</p>
-    <p>${party.partyLocation}</p>
-    <p>${party.partyDescription}</p>
+
+    const formattedDate = new Date(party.date).toLocaleDateString();
+
+    partyCard.innerHTML = /*html*/ `
+    <h2>${party.name}</h2>
+    <p>ID: ${party.id}</p>
+    <p>Date: ${formattedDate}</p>
+    <p>Location: ${party.location}</p>
+    <p>Description: ${party.description}</p>
 `;
 
     const deleteButton = document.createElement("button");
