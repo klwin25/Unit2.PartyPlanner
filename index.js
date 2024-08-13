@@ -1,4 +1,4 @@
-const COHORT = "2407-FTB-ET-WEB-FT";
+const COHORT = "2109-CPU-RM-WEB-PT";
 const API_URL = `https://fsa-crud-2aa9294fe819.herokuapp.com/api/${COHORT}/events`;
 
 const state = {
@@ -121,25 +121,25 @@ function renderParties() {
     return;
   }
 
-  const partyCards = state.parties.map((party) => {
+  const partyCards = state.parties.map((event) => {
     const partyCard = document.createElement("li");
     partyCard.classList.add("party");
 
-    const formattedDate = new Date(party.date).toLocaleDateString();
+    const formattedDate = new Date(event.date).toLocaleDateString();
 
     partyCard.innerHTML = /*html*/ `
-    <h2>${party.name}</h2>
-    <p>ID: ${party.id}</p>
+    <h2>${event.name}</h2>
+    <p>ID: ${event.id}</p>
     <p>Date: ${formattedDate}</p>
-    <p>Location: ${party.location}</p>
-    <p>Description: ${party.description}</p>
+    <p>Location: ${event.location}</p>
+    <p>Description: ${event.description}</p>
 `;
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete Party";
     partyCard.append(deleteButton);
 
-    deleteButton.addEventListener("click", () => deleteParty(party.id));
+    deleteButton.addEventListener("click", () => deleteParty(event.id));
 
     return partyCard;
   });
