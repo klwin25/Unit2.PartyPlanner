@@ -1,3 +1,12 @@
 body {
   background-color: rgb(198, 177, 150);
 }
+
+.party {
+  flex: 1 1 300px;
+  max-width: 400px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #141313;
+  border-radius: 5px;
+}
